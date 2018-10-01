@@ -1,0 +1,91 @@
+{% extends "layout.html" %}
+
+{% block head %}
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='users.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="users container">
+  <div class="row">
+    {% for tran in trans %}
+    <div class="card col-xs-6 col-sm-4 col-md-4">
+      <h4 class="card-text">
+        {{tran['amount']['amount']}} {{tran['amount']['currency']}}
+      </h4>
+      <h6 class="card-text">
+        From: {{tran['from']['user']['legal_names'][0]}} <br>
+        To: {{tran['to']['user']['legal_names'][0]}} <br>
+        Status: {{tran['recent_status']['status']}}
+      </h6>
+    </div>
+    {% endfor %}
+  </div>
+  <div class="row">
+    <form action="" method="POST">
+      {{ form.hidden_tag() }}
+      <fieldset>
+        <div class="form-group">
+          {{ form.to.label(class="form-control-label") }}
+          {% if form.to.errors %}
+            {{ form.to(class="form-control form-control-lg is-invalid") }}
+            <div class="invalid-feedback">
+              {% for error in form.to.errors%}
+                <span>{{ error }}</span>
+              {% endfor %}
+            </div>
+          {% else %}
+              {{ form.to(class=" form-control form-control-lg") }}
+          {% endif %}
+         </div>
+        <div class="form-group">
+          {{ form.network.label(class="form-control-label") }}
+          {% if form.network.errors %}
+            {{ form.network(class="form-control form-control-lg is-invalid") }}
+            <div class="invalid-feedback">
+              {% for error in form.network.errors%}
+                <span>{{ error }}</span>
+              {% endfor %}
+            </div>
+          {% else %}
+            {{ form.network(class="form-control form-control-lg") }}
+          {% endif %}
+        </div>
+        <div class="form-group">
+          {{ form.currency.label(class="form-control-label") }}
+          {% if form.currency.errors %}
+            {{ form.currency(class="form-control form-control-lg is-invalid") }}
+            <div class="invalid-feedback">
+              {% for error in form.currency.errors%}
+                <span>{{ error }}</span>
+              {% endfor %}
+            </div>
+          {% else %}
+            {{ form.currency(class="form-control form-control-lg") }}
+          {% endif %}
+        </div>
+        <div class="form-group">
+        {{ form.amount.label(class="form-control-label") }}
+        {% if form.amount.errors %}
+          {{ form.amount(class="form-control-label form-control-lg is-invalid") }}
+          <div class="invalid-feedback">
+            {% for error in form.amount.errors%}
+              <span>{{ error }}</span>
+            {% endfor %}
+          </div>
+        {% else %}
+          {{ form.amount(class="form-control form-control-lg") }}
+        {% endif %}
+        </div>
+      </fieldset>
+      <div class="form-group">
+          {{ form.pay(class="btn btn-outline-info") }}
+      </div>
+    </form>
+  </div>
+</div>
+
+{% endblock content %}
+
+
+
+
