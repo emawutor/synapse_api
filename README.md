@@ -1,5 +1,5 @@
-Synapse API:
+# Synapse API: </br>
 
-Displays all current users
-Access a users node (accounts)
-Make a transfer with a clients (node) account
+Displays all current users</br>
+Access a users node (accounts)</br>
+Make a transfer with a clients (node) account</br>
